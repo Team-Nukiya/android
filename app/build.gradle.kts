@@ -1,14 +1,9 @@
-import java.util.Properties
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     id("org.jetbrains.dokka")
 }
-
-val properties = Properties()
-properties.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "com.example.demention"
@@ -21,16 +16,10 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        buildFeatures {
-            buildConfig = true
-        }
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
-
-        buildConfigField("String", "BASE_URL", properties.getProperty("BASE_URL"))
     }
 
     buildTypes {
@@ -64,6 +53,8 @@ android {
 
 dependencies {
 
+    implementation(project(":data"))
+
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
@@ -84,8 +75,4 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
 }

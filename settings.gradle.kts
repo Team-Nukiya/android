@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Demention"
 include(":app")
- 
+include(":data")
