@@ -6,10 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.demention.feature.signup.LocationScreen
+import com.example.demention.feature.signup.PassScreen
+import com.example.demention.navigation.AppNavigationItem
 import com.example.demention.ui.theme.DementionTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,8 +25,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    DementionApp()
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun DementionApp() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = AppNavigationItem.Pass.route) {
+        composable(AppNavigationItem.Pass.route) {
+            PassScreen(navController = navController)
+        }
+        composable(AppNavigationItem.Location.route) {
+            LocationScreen(navController = navController)
         }
     }
 }
